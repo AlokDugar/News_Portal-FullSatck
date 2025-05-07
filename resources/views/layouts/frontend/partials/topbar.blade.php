@@ -49,9 +49,10 @@
                 </div>
                 <div class="social-wrap d-none d-xl-block">
                     <ul class="social-profile list-style">
-                        <li><a href="https://www.fb.com" target="_blank"><i class="ri-facebook-fill"></i></a></li>
-                        <li><a href="https://www.instagram.com" target="_blank"><i class="ri-instagram-line"></i></a></li>
-                        <li><a href="https://www.linkedin.com" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                        <li><a href="{{$socials->facebook}}" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                        <li><a href="{{$socials->instagram}}" target="_blank"><i class="ri-instagram-line"></i></a></li>
+                        <li><a href="{{$socials->linkedin}}" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                        <li><a href="{{$socials->twitter}}" target="_blank"><i class="ri-twitter-fill"></i></a></li>
                     </ul>
                 </div>
 

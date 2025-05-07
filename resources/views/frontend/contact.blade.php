@@ -1,5 +1,7 @@
+@php
+    $baseUrl = env('API_BASE_URL');
+@endphp
 @extends('layouts.app')
-
 @section('content')
     <section class="breadcrumb-section">
         <div class="container">
@@ -24,9 +26,10 @@
                             </div>
                             <div class="left-social">
                                 <ul>
-                                    <li><a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a></li>
-                                    <li><a href="https://www.twitter.com/"><i class="ri-instagram-line"></i></a></li>
-                                    <li><a href="https://www.linkedin.com/"><i class="ri-linkedin-fill"></i></a></li>
+                                    <li><a href="{{$socials->facebook}}" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                                    <li><a href="{{$socials->instagram}}" target="_blank"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="{{$socials->linkedin}}" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                                    <li><a href="{{$socials->twitter}}" target="_blank"><i class="ri-twitter-fill"></i></a></li>
                                 </ul>
                             </div>
                             <div class="informations">
@@ -99,10 +102,12 @@
                                         </div>
                                     </div> -->
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn-two">Send your Message</button>
+                                        <button type="submit" class="btn-two" id="submitBtn">Send your Message</button>
+                                        <div id="loader" class="loader" style="display: none;">Loading...</div>
                                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                                         <div class="clearfix"></div>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
@@ -115,51 +120,65 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    document.getElementById('submitBtn').addEventListener('click', function () {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('msg_subject').value;
+    const message = document.getElementById('message').value;
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('msg_subject').value;
-        const message = document.getElementById('message').value;
+    const data = {
+        name,
+        email,
+        subject,
+        message
+    };
 
-        const data = {
-            name: name,
-            email: email,
-            subject: subject,
-            message: message
-        };
+    const submitButton = document.getElementById('submitBtn');
+    submitButton.disabled = true;
+    submitButton.classList.add('btn-disabled');
 
-        fetch('http://127.0.0.1:8000/api/v1/contact-lists', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log('Success:', result);
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Message Sent!',
-                text: 'Thank you for your inquiry. We will get back to you shortly.',
-                confirmButtonColor: '#3085d6'
-            });
-
-            document.getElementById('contactForm').reset();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong while sending your message.',
-                confirmButtonColor: '#d33'
-            });
+    fetch('{{$baseUrl}}/contact-lists', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw { status: response.status, message: errorData.message || 'Request failed' };
+        }
+        return response.json();
+    })
+    .then(result => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'Thank you for your inquiry. We will get back to you shortly.',
+            confirmButtonColor: '#3085d6'
         });
+        document.getElementById('contactForm').reset();
+    })
+    .catch(error => {
+        let message = 'Something went wrong while sending your message.';
+        if (error.status === 422) {
+            message = 'You have exceeded your limit for 5 inquiries. Please wait for our response patiently.';
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: message,
+            confirmButtonColor: '#d33'
+        });
+    })
+    .finally(() => {
+        submitButton.disabled = false;
+        submitButton.classList.remove('btn-disabled');
     });
+});
+
+
 </script>
 @endsection
