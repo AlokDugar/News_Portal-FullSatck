@@ -2,7 +2,7 @@
     use Carbon\Carbon;
 
     $articleUrl = urlencode(url()->current());
-    $articleTitle = urlencode('Check out this article!');
+    $articleTitle = urlencode($article->title);
 ?>
 
 @extends('layouts.app')
@@ -70,12 +70,21 @@
                                 <div class="social">
                                     <p>Share On:</p>
                                     <ul>
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ $articleUrl }}" target="_blank" rel="noopener">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                        <li><a href="https://www.instagram.com/"><i class="ri-instagram-line"></i></a></li>
-                                        <li><a href="https://www.linkedin.com/"><i class="ri-linkedin-fill"></i></a></li>
-                                        <li><a href="https://www.linkedin.com/"><i class="ri-twitter-fill"></i></a></li>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $articleUrl }}" target="_blank" rel="noopener">
+                                                <i class="ri-facebook-fill"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $articleUrl }}" target="_blank" rel="noopener">
+                                                <i class="ri-linkedin-fill"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com/intent/tweet?text={{ $articleTitle }}&url={{ $articleUrl }}" target="_blank" rel="noopener">
+                                                <i class="ri-twitter-fill"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
