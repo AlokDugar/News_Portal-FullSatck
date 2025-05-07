@@ -8,6 +8,7 @@ use App\Models\ContactInfo;
 use App\Models\NewsCategory;
 use App\Models\NewsDetails;
 use App\Models\Setting;
+use App\Models\Social;
 use App\Models\Type;
 use App\Models\VideoGallery;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class FrontendController extends Controller
     public function home()
     {
         $typeId = Type::where('name', 'breaking')->value('id');
-        $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->orderBy('created_at', 'desc')->take(5)->get();
+        $socials = Social::first();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $categories = NewsCategory::where('status','Active')->get();
@@ -50,23 +52,25 @@ class FrontendController extends Controller
         }
         $heroSliderArticles = NewsDetails::where('state', 'Published')->whereNotNull('image_path')->where('image_path', '!=', '')->inRandomOrder()->take(5)->get();
         $popularPosts = NewsDetails::where('state', 'Published')->orderByDesc('views')->take(3)->get();
-        return view('frontend.home', compact(['breakings','topBannerAd','categories','recentArticles','middleBannerAd','sideBarAd','trendingNews','bottomBannerAd','videos','categoryArticles','heroSliderArticles','popularPosts']));
+        return view('frontend.home', compact(['breakings','socials','topBannerAd','categories','recentArticles','middleBannerAd','sideBarAd','trendingNews','bottomBannerAd','videos','categoryArticles','heroSliderArticles','popularPosts']));
     }
     public function contact()
     {
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $categories = NewsCategory::where('status','Active')->get();
         $contact= ContactInfo::first();
-        return view('frontend.contact', compact(['breakings','topBannerAd','categories','contact']));
+        return view('frontend.contact', compact(['breakings','socials','topBannerAd','categories','contact']));
     }
     public function category_news($categoryName)
     {
         $categoryName = urldecode($categoryName);
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $categories = NewsCategory::where('status','Active')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
@@ -74,12 +78,13 @@ class FrontendController extends Controller
         $articles = $query->where('state','Published')->whereHas('categories', function($q) use ($categoryName) {
                 $q->where('name', 'like', '%' . $categoryName . '%');
         })->paginate(2);
-        return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
+        return view('frontend.news', compact(['breakings', 'socials','topBannerAd', 'categories', 'articles']));
     }
     public function blog_details($id)
     {
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $categories = NewsCategory::where('status','Active')->get();
@@ -88,7 +93,7 @@ class FrontendController extends Controller
             $article->increment('views');
         }
         $popularPosts = NewsDetails::where('state', 'Published')->orderByDesc('views')->take(3)->get();
-        return view('frontend.blog-details', compact(['breakings','topBannerAd','categories','article','popularPosts']));
+        return view('frontend.blog-details', compact(['breakings','socials','topBannerAd','categories','article','popularPosts']));
     }
 
     public function search_news($title)
@@ -96,6 +101,7 @@ class FrontendController extends Controller
         $title = urldecode($title);
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $categories = NewsCategory::where('status','Active')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
@@ -104,13 +110,14 @@ class FrontendController extends Controller
             $query->where('title', 'like', '%' . $title . '%');
         }
         $articles = $query->where('state', 'Published')->paginate(2);
-        return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
+        return view('frontend.news', compact(['breakings','socials', 'topBannerAd', 'categories', 'articles']));
     }
     public function type_news($type)
     {
         $type = urldecode($type);
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $categories = NewsCategory::where('status','Active')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
@@ -123,26 +130,28 @@ class FrontendController extends Controller
                 $q->where('name', 'like', '%' . $type . '%');
             })->paginate(2);
         }
-        return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
+        return view('frontend.news', compact(['breakings', 'socials','topBannerAd', 'categories', 'articles']));
     }
     public function author()
     {
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $categories = NewsCategory::where('status','Active')->get();
         $contact= ContactInfo::first();
-        return view('frontend.author', compact(['breakings','topBannerAd','categories','contact']));
+        return view('frontend.author', compact(['breakings','socials','topBannerAd','categories','contact']));
     }
     public function video()
     {
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $socials = Social::first();
         $categories = NewsCategory::where('status','Active')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $videos= VideoGallery::where('status','Active')->paginate(2);
-        return view('frontend.video-news', compact(['breakings', 'topBannerAd', 'categories', 'videos']));
+        return view('frontend.video-news', compact(['breakings', 'socials','topBannerAd', 'categories', 'videos']));
     }
 }

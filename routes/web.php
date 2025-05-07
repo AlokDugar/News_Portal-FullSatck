@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/admin/check-old-password', [ProfileController::class, 'checkOldPassword'])->name('profile.checkOldPassword');
+    Route::put('/profile/socials', [ProfileController::class, 'updateSocials'])->name('profile.updateSocials');
 
     Route::resource('categories',NewsCategoryController::class);
     Route::resource('types',TypeController::class);

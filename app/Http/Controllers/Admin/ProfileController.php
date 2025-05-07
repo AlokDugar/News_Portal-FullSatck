@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\Social;
 
 class ProfileController extends Controller
 {
@@ -18,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('dashboard.profile.edit', [
             'user' => $request->user(),
+            'socials' => Social::first()
         ]);
     }
 
@@ -54,6 +56,27 @@ class ProfileController extends Controller
         return response()->json([
             'valid' => Hash::check($request->old_password, $user->password)
         ]);
+    }
+
+
+    public function updateSocials(Request $request)
+    {
+        $request->validate([
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'twitter' => 'nullable|url',
+        ]);
+
+        $social = Social::first();
+
+        if ($social) {
+            $social->update($request->only(['facebook', 'instagram', 'linkedin', 'twitter']));
+        } else {
+            Social::create($request->only(['facebook', 'instagram', 'linkedin', 'twitter']));
+        }
+
+        return back()->with('success', 'Social links updated successfully.');
     }
 
 }
