@@ -21,6 +21,7 @@ Route::get('/news/{category}',[FrontendController::class,'category_news'])->name
 Route::get('/type-news/{type}',[FrontendController::class,'type_news'])->name('type_news');
 Route::get('/search-news/{title}', [FrontendController::class, 'search_news'])->name('search_news');
 Route::get('/blog/{id}',[FrontendController::class,'blog_details'])->name('blog-details');
+Route::get('/video-news',[FrontendController::class,'video'])->name('video-news');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');

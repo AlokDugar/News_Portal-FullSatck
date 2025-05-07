@@ -24,6 +24,8 @@ class FrontendController extends Controller
         $recentArticles = NewsDetails::latest()->take(4)->get();
         $adTypeId = AdvertisementType::where('type', 'banner-middle ads')->value('id');
         $middleBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
+        $adTypeId = AdvertisementType::where('type', 'native-side ads')->value('id');
+        $sideBarAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $typeId = Type::where('name', 'trending')->value('id');
         $trendingNews = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-bottom ads')->value('id');
@@ -48,7 +50,7 @@ class FrontendController extends Controller
         }
         $heroSliderArticles = NewsDetails::where('state', 'Published')->whereNotNull('image_path')->where('image_path', '!=', '')->inRandomOrder()->take(5)->get();
         $popularPosts = NewsDetails::where('state', 'Published')->orderByDesc('views')->take(3)->get();
-        return view('frontend.home', compact(['breakings','topBannerAd','categories','recentArticles','middleBannerAd','trendingNews','bottomBannerAd','videos','categoryArticles','heroSliderArticles','popularPosts']));
+        return view('frontend.home', compact(['breakings','topBannerAd','categories','recentArticles','middleBannerAd','sideBarAd','trendingNews','bottomBannerAd','videos','categoryArticles','heroSliderArticles','popularPosts']));
     }
     public function contact()
     {
@@ -132,5 +134,15 @@ class FrontendController extends Controller
         $categories = NewsCategory::where('status','Active')->get();
         $contact= ContactInfo::first();
         return view('frontend.author', compact(['breakings','topBannerAd','categories','contact']));
+    }
+    public function video()
+    {
+        $typeId = Type::where('name', 'breaking')->value('id');
+        $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $categories = NewsCategory::where('status','Active')->get();
+        $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
+        $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
+        $videos= VideoGallery::where('status','Active')->get();
+        return view('frontend.video-news', compact(['breakings', 'topBannerAd', 'categories', 'videos']));
     }
 }
