@@ -52,6 +52,11 @@
                         @empty
                             <p>No articles available at the moment.</p>
                         @endforelse
+                        <div class="pagination-wrap">
+                            <div class="pagination">
+                                {{ $articles->links('pagination::bootstrap-4') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

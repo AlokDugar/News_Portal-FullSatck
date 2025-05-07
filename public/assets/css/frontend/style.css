@@ -6592,3 +6592,54 @@ span.has-dot::before {
     color: var(--secondaryColor)
 }
 
+.pagination-wrap .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+  }
+
+  .pagination-wrap .pagination .page-link {
+    text-decoration: none;
+    color: white;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #ff6200ed;
+    border-radius: 50%;
+    background-color: #ff6200ed;
+    transition: all 0.3s ease;
+    font-size: 16px;
+  }
+
+  .pagination-wrap .pagination .page-link:hover {
+    background-color: #ff6200;
+    border-color: #ff6200;
+  }
+
+  .pagination-wrap .pagination .page-item.active .page-link {
+    background-color: #ff5500;
+    border-color: #ff6200;
+    color: white;
+    font-weight: bold;
+  }
+
+  .pagination-wrap .pagination .page-item.disabled .page-link {
+    background-color: #ff8400;
+    color: #666;
+    pointer-events: none;
+    border-color: #ff8400;
+  }
+
+  .pagination-wrap .pagination .page-link.prev, .pagination-wrap .pagination .page-link.next {
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #ff6200ed;
+    border: 1px solid #ff6200ed;
+  }

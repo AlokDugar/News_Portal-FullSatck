@@ -37,6 +37,10 @@
                         @empty
                             <p>No video news available at the moment.</p>
                         @endforelse
+                        
+                        <div class="pagination-wrap">
+                            {{ $articles->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

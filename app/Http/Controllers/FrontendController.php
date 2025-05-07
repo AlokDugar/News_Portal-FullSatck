@@ -73,7 +73,7 @@ class FrontendController extends Controller
         $query = NewsDetails::query();
         $articles = $query->where('state','Published')->whereHas('categories', function($q) use ($categoryName) {
                 $q->where('name', 'like', '%' . $categoryName . '%');
-        })->get();
+        })->paginate(2);
         return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
     }
     public function blog_details($id)
@@ -103,7 +103,7 @@ class FrontendController extends Controller
         if ($title) {
             $query->where('title', 'like', '%' . $title . '%');
         }
-        $articles = $query->where('state', 'Published')->get();
+        $articles = $query->where('state', 'Published')->paginate(2);
         return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
     }
     public function type_news($type)
@@ -116,12 +116,12 @@ class FrontendController extends Controller
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
         $query = NewsDetails::query();
         if($type==='all'){
-            $articles = NewsDetails::latest()->get();
+            $articles = NewsDetails::latest()->paginate(2);
         }
         else{
             $articles = NewsDetails::where('state', 'published')->whereHas('type', function($q) use ($type) {
                 $q->where('name', 'like', '%' . $type . '%');
-            })->get();
+            })->paginate(2);
         }
         return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
     }
@@ -142,7 +142,7 @@ class FrontendController extends Controller
         $categories = NewsCategory::where('status','Active')->get();
         $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
         $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
-        $videos= VideoGallery::where('status','Active')->get();
+        $videos= VideoGallery::where('status','Active')->paginate(2);
         return view('frontend.video-news', compact(['breakings', 'topBannerAd', 'categories', 'videos']));
     }
 }
