@@ -6315,7 +6315,9 @@ span.has-dot::before {
 ===============================*/
 .post-format-inner-banner {
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
+    background-color: black;
     height: 500px;
     display: flex;
     align-items: end

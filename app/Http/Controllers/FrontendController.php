@@ -62,6 +62,7 @@ class FrontendController extends Controller
     }
     public function category_news($categoryName)
     {
+        $categoryName = urldecode($categoryName);
         $typeId = Type::where('name', 'breaking')->value('id');
         $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
         $categories = NewsCategory::where('status','Active')->get();
@@ -102,5 +103,34 @@ class FrontendController extends Controller
         }
         $articles = $query->where('state', 'Published')->get();
         return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
+    }
+    public function type_news($type)
+    {
+        $type = urldecode($type);
+        $typeId = Type::where('name', 'breaking')->value('id');
+        $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $categories = NewsCategory::where('status','Active')->get();
+        $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
+        $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
+        $query = NewsDetails::query();
+        if($type==='all'){
+            $articles = NewsDetails::latest()->get();
+        }
+        else{
+            $articles = NewsDetails::where('state', 'published')->whereHas('type', function($q) use ($type) {
+                $q->where('name', 'like', '%' . $type . '%');
+            })->get();
+        }
+        return view('frontend.news', compact(['breakings', 'topBannerAd', 'categories', 'articles']));
+    }
+    public function author()
+    {
+        $typeId = Type::where('name', 'breaking')->value('id');
+        $breakings = NewsDetails::where('type_id', $typeId)->where('state', 'published')->get();
+        $adTypeId = AdvertisementType::where('type', 'banner-top ads')->value('id');
+        $topBannerAd = Advertisement::where('type_id', $adTypeId)->where('status', 'Active')->latest()->first();
+        $categories = NewsCategory::where('status','Active')->get();
+        $contact= ContactInfo::first();
+        return view('frontend.author', compact(['breakings','topBannerAd','categories','contact']));
     }
 }

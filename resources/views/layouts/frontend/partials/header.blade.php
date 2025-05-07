@@ -72,11 +72,11 @@
 
                     <div class="dropdown right-menu d-inline-flex news-language d-lg-none">
                         <a class="dropdown-toggle" href="#" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-fluid country-flag" src="{{ asset('images/frontend/country-flags/02.jpg') }}" > English<i class="ri-arrow-down-s-line"></i>
+                            English<i class="ri-arrow-down-s-line"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="dropdownMenuButton2">
-                            <a class="dropdown-item" href="#"><img class="img-fluid country-flag" src="{{ asset('images/frontend/country-flags/02.jpg') }}" >English</a>
-                            <a class="dropdown-item" href="#"><img class="img-fluid country-flag" src="{{ asset('images/frontend/country-flags/09.jpg') }}" >Nepali</a>
+                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item" href="#">Nepali</a>
                         </div>
                     </div>
 

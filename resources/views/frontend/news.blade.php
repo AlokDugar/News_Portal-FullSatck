@@ -25,7 +25,7 @@
                             <div class="blog-post">
                                 <div class="blog-post-thumb">
                                     <a href="{{ route('blog-details', $article->id) }}">
-                                        <img src="{{ $article->image_path ? asset('storage/' . $article->image_path) : asset('assets/images/no-image.jpg') }}"  alt="{{ $article->title }}">
+                                        <img src="{{ $article->image_path ? asset('storage/' . $article->image_path) : asset('assets/images/no-image.jpg') }}"  alt="">
                                     </a>
                                 </div>
                                 <div class="blog-post-content">
@@ -33,12 +33,12 @@
                                         <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
                                     @endforeach
                                     <h2 class="post-title bold-underline">
-                                        <a href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                        <a href="{{ route('blog-details', $article->id) }}">{{$article->title}}</a>
                                     </h2>
                                     <div class="blog-post-meta">
                                         <ul class="list-wrap">
                                             @if($article->author)
-                                                <li><i class="ri-account-circle-line"></i>by <a href="#">{{ $article->author ?? 'Admin' }}</a></li>
+                                                <li><i class="ri-account-circle-line"></i>by {{ $article->author ?? 'Admin' }}</li>
                                             @endif
                                             @if($article->published_date)
                                                 <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}

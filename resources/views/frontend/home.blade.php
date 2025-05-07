@@ -20,7 +20,7 @@
                                                 @endforeach
                                             </div>
                                             <h1 class="post-title mb-20 font-weight-900 text-white">
-                                                <a class="text-white line-links" href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                                <a class="text-white line-links" href="{{ route('blog-details', $article->id) }}">{{$article->title}}</a>
                                             </h1>
                                             <div class="entry-meta meta-1 font-12 text-white mt-10 pr-5 pl-5">
                                                 <span class="post-on">{{  $article->published_date?Carbon::parse($article->published_date)->format('d F Y'):'N/A'}}</span>
@@ -45,7 +45,7 @@
                                             <img class="border-radius-5" src="{{ asset('storage/'.$article->image_path) }}" >
                                         </div>
                                         <div class="post-content media-body">
-                                            <h5 class="post-title mb-15 text-limit-2-row text-white">{{ $article->title }}</h5>
+                                            <h5 class="post-title mb-15 text-limit-2-row text-white">{{ Str::limit($article->title, 50) }}</h5>
                                             <div class="entry-meta meta-1 float-left font-10 text-uppercase">
                                                 <span class="post-on text-white">{{ $article->published_date?Carbon::parse($article->published_date)->format('d M'):'N/A' }}</span>
                                                 <span class="post-by has-dot text-white">{{ $article->views??0 }} views</span>
@@ -71,7 +71,7 @@
                                         <h2 class="title">Recent Posts</h2>
                                     </div>
                                     <div class="view-all-btn">
-                                        <a href="{{ route('category_news',['category'=>'all']) }}" class="link-btn">View All
+                                        <a href="{{ route('type_news',['type'=>'all']) }}" class="link-btn">View All
                                             <span class="svg-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
                                                     <path d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z" fill="currentColor"/>
@@ -96,12 +96,12 @@
                                                             <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
                                                         @endforeach
                                                         <h2 class="post-title">
-                                                            <a href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                                            <a href="{{ route('blog-details', $article->id) }}">{{ Str::limit($article->title, 50) }}</a>
                                                         </h2>
                                                         <div class="blog-post-meta white-blog-meta">
                                                             <ul class="list-wrap">
                                                                 @if($article->author)
-                                                                    <li><i class="ri-account-circle-line"></i>by <a href="#">{{ $article->author ?? 'Admin' }}</a></li>
+                                                                    <li><i class="ri-account-circle-line"></i>by {{ $article->author ?? 'Admin' }}</li>
                                                                 @endif
                                                                 @if($article->published_date)
                                                                     <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}
@@ -125,7 +125,7 @@
                                                         <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
                                                     @endforeach
                                                     <h2 class="post-title">
-                                                        <a href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                                        <a href="{{ route('blog-details', $article->id) }}">{{ Str::limit($article->title, 50) }}</a>
                                                     </h2>
                                                     <div class="blog-post-meta">
                                                         <ul class="list-wrap">
@@ -153,7 +153,7 @@
                                         <h2 class="title">Trending News</h2>
                                     </div>
                                     <div class="view-all-btn">
-                                        <a href="blog.html" class="link-btn">View All
+                                        <a href="{{route('type_news',['type'=>'Trending'])}}" class="link-btn">View All
                                             <span class="svg-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
                                                     <path d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z" fill="currentColor" />
@@ -179,12 +179,12 @@
                                                             <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
                                                         @endforeach
                                                         <h2 class="post-title bold-underline">
-                                                            <a href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                                            <a href="{{ route('blog-details', $article->id) }}">{{ Str::limit($article->title, 50) }}</a>
                                                         </h2>
                                                         <div class="blog-post-meta">
                                                             <ul class="list-wrap">
                                                                 @if($article->author)
-                                                                    <li><i class="ri-account-circle-line"></i>by <a href="#">{{ $article->author ?? 'Admin' }}</a></li>
+                                                                    <li><i class="ri-account-circle-line"></i>by {{ $article->author ?? 'Admin' }}</li>
                                                                 @endif
                                                                 @if($article->published_date)
                                                                     <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}
@@ -220,12 +220,12 @@
                                                     </div>
                                                     <div class="trending-post-content-two">
                                                         <h2 class="post-title">
-                                                            <a href="{{ route('blog-details', $article->id) }}">{{ $article->title }}</a>
+                                                            <a href="{{ route('blog-details', $article->id) }}">{{ Str::limit($article->title, 50) }}</a>
                                                         </h2>
                                                         <div class="blog-post-meta">
                                                             <ul class="list-wrap">
                                                                 @if($article->author)
-                                                                    <li><i class="ri-account-circle-line"></i>by <a href="#">{{ $article->author ?? 'Admin' }}</a></li>
+                                                                    <li><i class="ri-account-circle-line"></i>by {{ $article->author ?? 'Admin' }}</li>
                                                                 @endif
                                                                 @if($article->published_date)
                                                                     <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}
@@ -275,7 +275,7 @@
                                         <div class="popular-post">
                                             <div class="thumb" style="width: 80px; height: 80px; flex-shrink: 0; background-color: #f0f0f0;">
                                                 <a href="{{ route('blog-details', $post->id) }}">
-                                                    <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : asset('assets/images/no-image.jpg') }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: contain;">
+                                                    <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : asset('assets/images/no-image.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
                                                 </a>
                                             </div>
                                             <div class="content">
@@ -392,7 +392,7 @@
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-15 fw-500 lineh-21">
-                                                            <a href="{{ route('blog-details', $post->id)}}"> {{ $post->title }} </a>
+                                                            <a href="{{ route('blog-details', $post->id)}}"> {{Str::limit( $post->title,50)}} </a>
                                                         </h6>
                                                         <div class="entry-meta meta-1 text-uppercase">
                                                             <span class="post-on">{{ $post->published_date ? Carbon::parse($post->published_date)->format('d M'):'N/A' }}</span>

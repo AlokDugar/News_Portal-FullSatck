@@ -50,11 +50,11 @@
                                         <h3>20</h3>
                                         <p>November</p>
                                     </div>
-                                    <h2 class="post-title bold-underline"><a href="{{route('blog-details')}}">Iphone Devices Are Going To Incredible Now a days</a></h2>
+                                    <h2 class="post-title bold-underline"><a href="#">Iphone Devices Are Going To Incredible Now a days</a></h2>
                                     <p>Browned butter and brown sugar area caramelly goodness, crispy edgesick and soft centers rare melty little puddles of chocolate first favorite thing about these browned butter.</p>
                                 </div>
                                 <div class="blog-post-thumb">
-                                    <a href="{{route('blog-details')}}"><img src="assets/images/frontend/news/recent/trending_post01.jpg" ></a>
+                                    <a href="#"><img src="assets/images/frontend/news/recent/trending_post01.jpg" ></a>
                                 </div>
                             </div>
                             <div class="blog-post">
@@ -68,7 +68,7 @@
                                         <h3>20</h3>
                                         <p>November</p>
                                     </div>
-                                    <h2 class="post-title bold-underline"><a href="{{route('blog-details')}}">Iphone Devices Are Going To Incredible Now a days</a></h2>
+                                    <h2 class="post-title bold-underline"><a href="#">Iphone Devices Are Going To Incredible Now a days</a></h2>
                                     <div class="blog-post-meta">
                                         <ul class="list-wrap">
                                             <li><i class="ri-account-circle-line"></i>by<a href="{{route('author')}}">Admin</a></li>
@@ -79,7 +79,7 @@
                                     <p>Browned butter and brown sugar area caramelly goodness, crispy edgesick and soft centers rare melty little puddles of chocolate first favorite thing about these browned butter.</p>
                                 </div>
                                 <div class="blog-post-thumb">
-                                    <a href="{{route('blog-details')}}"><img src="assets/images/frontend/news/recent/trending_post01.jpg" ></a>
+                                    <a href="#"><img src="assets/images/frontend/news/recent/trending_post01.jpg" ></a>
                                 </div>
                             </div>
                         </div>

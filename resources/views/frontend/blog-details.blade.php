@@ -20,10 +20,10 @@
                             @if ($article->author)
                                 <div class="author-area">
                                     <div class="author-img">
-                                        <img src="assets/images/frontend/author/single-author.jpg" >
+                                        <img src="{{asset('assets/images/frontend/author/single-author.jpg')}}" >
                                     </div>
                                     <div class="author-content">
-                                        <p>By, <a href="{{route('author')}}">{{$article->author}}</a></p>
+                                        <p>By, {{$article->author}}</p>
                                     </div>
                                 </div>
                             @endif
@@ -87,7 +87,7 @@
                                             <div class="popular-post">
                                                 <div class="thumb" style="width: 80px; height: 80px; flex-shrink: 0; background-color: #f0f0f0;">
                                                     <a href="{{ route('blog-details', $post->id) }}">
-                                                        <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : asset('assets/images/no-image.jpg') }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: contain;">
+                                                        <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : asset('assets/images/no-image.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
                                                     </a>
                                                 </div>
                                                 <div class="content">

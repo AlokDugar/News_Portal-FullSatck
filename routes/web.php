@@ -16,13 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontendController::class,'home'])->name('home');
 Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+Route::get('/author',[FrontendController::class,'author'])->name('author');
 Route::get('/news/{category}',[FrontendController::class,'category_news'])->name('category_news');
+Route::get('/type-news/{type}',[FrontendController::class,'type_news'])->name('type_news');
 Route::get('/search-news/{title}', [FrontendController::class, 'search_news'])->name('search_news');
 Route::get('/blog/{id}',[FrontendController::class,'blog_details'])->name('blog-details');
-
-Route::get('/author', function () {
-    return view('frontend.author');
-})->name('author');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');

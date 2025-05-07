@@ -43,7 +43,7 @@
                                         <i class="bi bi-envelope"></i>
                                     </div>
                                     <div class="info">
-                                        <a href="mailto:{{$contact->email}}">{{$contact->email}}</a>
+                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{$contact->email}}" target="_blank">{{$contact->email}}</a>
                                     </div>
                                 </div>
                             </div>
