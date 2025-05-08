@@ -46,7 +46,7 @@
                                         <i class="bi bi-envelope"></i>
                                     </div>
                                     <div class="info">
-                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{$contact->email}}" target="_blank">{{$contact->email}}</a>
+                                        <a href="#" id="emailLink" target="_blank">{{$contact->email}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +119,7 @@
 @endsection
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     document.getElementById('submitBtn').addEventListener('click', function () {
     const name = document.getElementById('name').value;
@@ -178,7 +179,5 @@
         submitButton.classList.remove('btn-disabled');
     });
 });
-
-
 </script>
 @endsection

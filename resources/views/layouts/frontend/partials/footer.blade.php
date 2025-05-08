@@ -40,7 +40,7 @@
                             <h4 class="fw-title">Contact</h4>
                             <div class="footer-link-wrap">
                                 <ul class="list-unstyled list-wrap">
-                                    <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to={{$contact->email}}" target="_blank">Email Us</a></li>
+                                    <li><a href="#" id="footerEmailLink" target="_blank">Email Us</a></li>
                                     <li><a href="tel:{{$contact->phone}}" target="_blank">Call Us</a></li>
                                 </ul>
                             </div>

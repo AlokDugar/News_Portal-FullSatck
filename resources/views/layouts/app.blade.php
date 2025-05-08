@@ -1,7 +1,9 @@
 <?php
-  use App\Models\Setting;
+    use App\Models\Setting;
+    use App\Models\ContactInfo;
 
-  $settings=Setting::first();
+    $settings=Setting::first();
+    $contact= ContactInfo::first();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,6 +117,14 @@
         <script src="{{ asset('assets/js/frontend/vendor/youtube/video.js') }}"></script>
         <script src="{{ asset('assets/js/frontend/main.js') }}"></script>
         <script src="{{ asset('assets/js/frontend/active.js') }}"></script>
+        <script>
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const mobileLink = "mailto:{{$contact->email}}";
+            const desktopLink = "https://mail.google.com/mail/?view=cm&fs=1&to={{$contact->email}}";
+
+            document.getElementById("footerEmailLink").href = isMobile ? mobileLink : desktopLink;
+            document.getElementById("emailLink").href = isMobile ? mobileLink : desktopLink;
+        </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const searchInput = document.querySelector(".mobile-search input");
