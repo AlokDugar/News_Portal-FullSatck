@@ -134,6 +134,11 @@
                                 <input class="form-control" type="url" name="twitter" value="{{ old('twitter', $socials->twitter ?? '') }}" placeholder="https://twitter.com/yourname">
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label f-w-500">Youtube</label>
+                                <input class="form-control" type="url" name="youtube" value="{{ old('youtube', $socials->youtube ?? '') }}" placeholder="https://youtube.com/yourname">
+                            </div>
+
                             <div class="card-footer text-center">
                                 <button class="btn btn-primary" type="submit">Update Social Links</button>
                             </div>

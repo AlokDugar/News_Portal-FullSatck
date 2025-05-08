@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Admin\SearchApiController;
 use App\Http\Controllers\Api\V1\Admin\VideoGalleryApiController;
 use App\Http\Controllers\Api\V1\Admin\ContactInfoApiController;
 use App\Http\Controllers\Api\V1\Admin\ContactListApiController;
+use App\Http\Controllers\Api\V1\Admin\SocialsApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
     Route::apiResource('video-gallery', VideoGalleryApiController::class);
     Route::apiResource('contact-infos', ContactInfoApiController::class);
     Route::apiResource('contact-lists', ContactListApiController::class);
+    Route::apiResource('socials', SocialsApiController::class);
 });
 
 

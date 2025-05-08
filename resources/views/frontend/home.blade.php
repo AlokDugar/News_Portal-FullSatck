@@ -244,15 +244,15 @@
                             <div class="sidebar-wrap">
                                 <div class="sidebar-widget sidebar-widget">
                                     <div class="widget-title mb-30">
-                                        <h6 class="title">Subscribe & Followers</h6>
+                                        <h6 class="title">Subscribe & Follow Us</h6>
                                         <div class="section-title-line"></div>
                                     </div>
                                     <div class="sidebar-social-wrap">
                                         <ul class="list-unstyled list-wrap row gutter-y-10">
-                                            <li><a href="#"><i class="ri-facebook-fill"></i>facebook</a></li>
-                                            <li><a href="#"><i class="ri-instagram-fill"></i>instagram</a></li>
-                                            <li><a href="#"><i class="ri-youtube-fill"></i>youtube</a></li>
-                                            <li><a href="#"><i class="ri-linkedin-fill"></i>LinkedIn</a></li>
+                                            <li><a href="{{$socials->facebook}}" target="_blank"><i class="ri-facebook-fill"></i>Facebook</a></li>
+                                            <li><a href="{{$socials->instagram}}" target="_blank"><i class="ri-instagram-line"></i>Instagram</a></li>
+                                            <li><a href="{{$socials->youtube}}" target="_blank"><i class="ri-youtube-fill"></i>Youtube</a></li>
+                                            <li><a href="{{$socials->linkedin}}" target="_blank"><i class="ri-linkedin-fill"></i>LinkedIn</a></li>
                                         </ul>
                                     </div>
                                 </div>

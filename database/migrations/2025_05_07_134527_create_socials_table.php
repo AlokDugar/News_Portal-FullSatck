@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('twitter')->nullable();
+            $table->string('youtube')->nullable();
             $table->timestamps();
         });
     }

@@ -66,14 +66,15 @@ class ProfileController extends Controller
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
             'twitter' => 'nullable|url',
+            'youtube' => 'nullable|url'
         ]);
 
         $social = Social::first();
 
         if ($social) {
-            $social->update($request->only(['facebook', 'instagram', 'linkedin', 'twitter']));
+            $social->update($request->only(['facebook', 'instagram', 'linkedin', 'twitter','youtube']));
         } else {
-            Social::create($request->only(['facebook', 'instagram', 'linkedin', 'twitter']));
+            Social::create($request->only(['facebook', 'instagram', 'linkedin', 'twitter', 'youtube']));
         }
 
         return back()->with('success', 'Social links updated successfully.');
