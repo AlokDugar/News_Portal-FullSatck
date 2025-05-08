@@ -17,22 +17,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-lg-0">
                         <div class="footer-widget">
                             <h4 class="fw-title">Quick Links</h4>
                             <div class="footer-link-wrap">
                                 <ul class="list-unstyled list-wrap">
+                                    <li> <a href="{{route('home')}}">Home</a></li>
                                     @foreach ($categories as $category)
                                         <li class="">
                                             <a href="{{ route('category_news', ['category' => $category->name]) }}" class="">{{$category->name}}</a>
                                         </li>
                                     @endforeach
+                                    <li> <a href="{{route('contact')}}">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="col-lg-5 col-md-12 col-sm-12">
                         <div class="footer-widget">
                             <h4 class="fw-title">Contact</h4>
@@ -45,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="footer-bottom">
