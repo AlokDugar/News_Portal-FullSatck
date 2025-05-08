@@ -109,11 +109,13 @@
                                                     <h2 class="post-title">
                                                         <a href="{{ route('blog-details', $post->id) }}">{{ Str::limit($post->title, 50) }}</a>
                                                     </h2>
-                                                    <div class="blog-post-meta">
-                                                        <ul class="list-wrap">
-                                                            <li><i class="ri-calendar-line"></i>{{ $post->published_date?Carbon::parse($post->published_date)->format('d F, Y'):'N/A' }}</li>
-                                                        </ul>
-                                                    </div>
+                                                    @if ($post->published_date)
+                                                        <div class="blog-post-meta">
+                                                            <ul class="list-wrap">
+                                                                <li><i class="ri-calendar-line"></i>{{ Carbon::parse($post->published_date)->format('d F, Y') }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach

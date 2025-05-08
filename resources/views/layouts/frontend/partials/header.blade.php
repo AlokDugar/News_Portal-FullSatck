@@ -13,6 +13,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-7">
                     <div class="header__right float-end">
+                        <!--
                         <div class="dropdown right-menu d-inline-flex news-language">
                             <a class="dropdown-toggle" href="#" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 English<i class="ri-arrow-down-s-line"></i>
@@ -22,6 +23,7 @@
                                 <a class="dropdown-item" href="#">Nepali</a>
                             </div>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>
@@ -70,6 +72,7 @@
                         <!-- <img class="logo-dark" src="{{ asset('assets/images/frontend/logo-white.webp') }}" alt="logo"> -->
                     </a>
 
+                    <!--
                     <div class="dropdown right-menu d-inline-flex news-language d-lg-none">
                         <a class="dropdown-toggle" href="#" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             English<i class="ri-arrow-down-s-line"></i>
@@ -79,6 +82,7 @@
                             <a class="dropdown-item" href="#">Nepali</a>
                         </div>
                     </div>
+                    -->
 
                     <div class="option-item">
                         <button type="button" class="search-btn">

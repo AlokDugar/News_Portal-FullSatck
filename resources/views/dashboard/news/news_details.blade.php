@@ -60,7 +60,7 @@
                                                 <td>
                                                     <img src="{{ $news->image_path && file_exists(storage_path('app/public/' . $news->image_path))
                                                     ? asset('storage/' . $news->image_path)
-                                                    : asset('assets/images/blank.png') }}" alt="News Image" width="100" height="100">
+                                                    : asset('assets/images/no-image.jpg') }}" alt="News Image" width="100" height="100">
                                                 </td>
                                                 <td><span class="badge badge-light-primary">{{ $news->type->name ?? "N/A" }}</span></td>
                                                 <td>

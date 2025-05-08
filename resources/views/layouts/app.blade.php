@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/frontend/plugin.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/frontend/style.css') }}">
         <!-- <link rel="stylesheet" href="{{ asset('assets/css/frontend/responsive.css') }}"> -->
-        <title>Blog - Responsive Blog HTML Template</title>
+        <title>{{$settings->website_name}}</title>
         <link rel="icon" href="{{ $settings->favicon ? asset('storage/' . $settings->favicon) : asset('assets/images/default_favicon.png') }}" type="image/x-icon">
         <link rel="shortcut icon" href="{{ $settings->favicon ? asset('storage/' . $settings->favicon) : asset('assets/images/default_favicon.png') }}" type="image/x-icon">
     </head>

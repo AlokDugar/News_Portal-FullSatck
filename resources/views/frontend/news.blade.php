@@ -10,7 +10,13 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">News</li>
+                    @if (isset($categoryName))
+                        <li class="breadcrumb-item active" aria-current="page">{{ $categoryName }}</li>
+                    @elseif (isset($title))
+                        <li class="breadcrumb-item active" aria-current="page">Keyword: {{ $title }}</li>
+                    @elseif (isset($type))
+                        <li class="breadcrumb-item active" aria-current="page">{{ $type }}</li>
+                    @endif
                 </ol>
             </nav>
         </div>
@@ -29,9 +35,11 @@
                                     </a>
                                 </div>
                                 <div class="blog-post-content">
-                                    @foreach ($article->categories as $category)
-                                        <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
-                                    @endforeach
+                                    <div class="post-tags">
+                                        @foreach ($article->categories as $category)
+                                            <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
+                                        @endforeach
+                                    </div>
                                     <h2 class="post-title bold-underline">
                                         <a href="{{ route('blog-details', $article->id) }}">{{$article->title}}</a>
                                     </h2>
@@ -42,8 +50,8 @@
                                             @endif
                                             @if($article->published_date)
                                                 <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}
+                                                <li><i class="ri-history-line"></i>{{ Carbon::parse($article->published_date)->diffForHumans() }}</li>
                                             @endif
-                                            <li><i class="ri-history-line"></i>{{ ceil(str_word_count(strip_tags($article->content))/200) }} Mins</li>
                                         </ul>
                                     </div>
                                     <p>{{ Str::limit(strip_tags($article->content), 200) }}</p>

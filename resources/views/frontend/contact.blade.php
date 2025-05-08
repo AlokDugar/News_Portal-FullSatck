@@ -22,7 +22,7 @@
                         <div class="contact-box">
                             <div class="title">
                                 <h3>Contact Us</h3>
-                                <p>Morbi quis elementum ex, id commodo odio. In maximus, augue europea vestibulum gomat. </p>
+                                <!--p>Morbi quis elementum ex, id commodo odio. In maximus, augue europea vestibulum gomat. </p>-->
                             </div>
                             <div class="left-social">
                                 <ul>

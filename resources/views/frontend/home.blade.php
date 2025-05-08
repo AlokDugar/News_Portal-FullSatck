@@ -23,8 +23,10 @@
                                                 <a class="text-white line-links" href="{{ route('blog-details', $article->id) }}">{{$article->title}}</a>
                                             </h1>
                                             <div class="entry-meta meta-1 font-12 text-white mt-10 pr-5 pl-5">
-                                                <span class="post-on">{{  $article->published_date?Carbon::parse($article->published_date)->format('d F Y'):'N/A'}}</span>
-                                                <span class="hit-count has-dot">{{ $article->views??0 }} Views</span>
+                                                @if($article->published_date)
+                                                    <span class="post-on">{{Carbon::parse($article->published_date)->format('d F Y')}}</span>
+                                                @endif
+                                                <span class="hit-count {{ $article->published_date ? 'has-dot' : '' }}">{{ $article->views??0 }} Views</span>
                                             </div>
                                         </div>
                                     </div>
@@ -47,8 +49,10 @@
                                         <div class="post-content media-body">
                                             <h5 class="post-title mb-15 text-limit-2-row text-white">{{ Str::limit($article->title, 50) }}</h5>
                                             <div class="entry-meta meta-1 float-left font-10 text-uppercase">
-                                                <span class="post-on text-white">{{ $article->published_date?Carbon::parse($article->published_date)->format('d M'):'N/A' }}</span>
-                                                <span class="post-by has-dot text-white">{{ $article->views??0 }} views</span>
+                                                @if($article->published_date)
+                                                    <span class="post-on text-white">{{ Carbon::parse($article->published_date)->format('d M')}}</span>
+                                                @endif
+                                                <span class="post-by {{ $article->published_date ? 'has-dot' : '' }} text-white">{{ $article->views??0 }} views</span>
                                             </div>
                                         </div>
                                     </div>
@@ -175,9 +179,11 @@
                                                         </a>
                                                     </div>
                                                     <div class="trending-post-content">
-                                                        @foreach ($article->categories as $category)
-                                                            <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
-                                                        @endforeach
+                                                        <div class="post-tags">
+                                                            @foreach ($article->categories as $category)
+                                                                <a href="{{ route('category_news', ['category' => $category->name]) }}" class="post-tag">{{ $category->name }}</a>
+                                                            @endforeach
+                                                        </div>
                                                         <h2 class="post-title bold-underline">
                                                             <a href="{{ route('blog-details', $article->id) }}">{{ Str::limit($article->title, 50) }}</a>
                                                         </h2>
@@ -189,7 +195,7 @@
                                                                 @if($article->published_date)
                                                                     <li><i class="ri-calendar-line"></i>{{ Carbon::parse($article->published_date)->format('d F, Y') }}
                                                                 @endif
-                                                                <li><i class="ri-history-line"></i> {{ ceil(count(preg_split('/\s+/', strip_tags($article->content), -1, PREG_SPLIT_NO_EMPTY)) / 200) }} Mins</li>
+                                                                <li><i class="ri-history-line"></i> {{ Carbon::parse($article->published_date)->diffForHumans() }}</li>
                                                             </ul>
                                                         </div>
                                                         <p>{{ Str::limit(strip_tags($article->content), 200) }}</p>
@@ -285,11 +291,13 @@
                                                 <h2 class="post-title">
                                                     <a href="{{ route('blog-details', $post->id) }}">{{ Str::limit($post->title, 50) }}</a>
                                                 </h2>
-                                                <div class="blog-post-meta">
-                                                    <ul class="list-wrap">
-                                                        <li><i class="ri-calendar-line"></i>{{ $post->published_date?Carbon::parse($post->published_date)->format('d F, Y'):'N/A' }}</li>
-                                                    </ul>
-                                                </div>
+                                                @if ($post->published_date)
+                                                    <div class="blog-post-meta">
+                                                        <ul class="list-wrap">
+                                                            <li><i class="ri-calendar-line"></i>{{ Carbon::parse($post->published_date)->format('d F, Y') }}</li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     @endforeach
@@ -395,8 +403,10 @@
                                                             <a href="{{ route('blog-details', $post->id)}}"> {{Str::limit( $post->title,50)}} </a>
                                                         </h6>
                                                         <div class="entry-meta meta-1 text-uppercase">
-                                                            <span class="post-on">{{ $post->published_date ? Carbon::parse($post->published_date)->format('d M'):'N/A' }}</span>
-                                                            <span class="post-by has-dot">{{ $post->views ?? '0' }} views</span>
+                                                            @if ($post->published_date)
+                                                                <span class="post-on">{{Carbon::parse($post->published_date)->format('d M') }}</span>
+                                                            @endif
+                                                            <span class="post-by {{ $post->published_date ? 'has-dot' : '' }}">{{ $post->views ?? '0' }} views</span>
                                                         </div>
                                                     </div>
                                                 </div>
