@@ -127,14 +127,15 @@
         </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const searchInput = document.querySelector(".mobile-search input");
-                const searchIcon = document.querySelector(".mobile-search .bi-search");
+                const searchInput = document.getElementById('searchInput');
+                const searchBtn = document.getElementById('searchBtn');
 
                 function performSearch() {
                     const query = encodeURIComponent(searchInput.value.trim());
                     if (!query) return;
 
-                    const url = `/search-news/${query}`;
+                    const baseUrl = searchInput.dataset.searchBaseUrl;
+                    const url = `${baseUrl}/${query}`;
                     window.location.href = url;
                 }
 
@@ -144,7 +145,7 @@
                     }
                 });
 
-                searchIcon.addEventListener("click", performSearch);
+                searchBtn.addEventListener("click", performSearch);
             });
         </script>
         @yield('scripts')
