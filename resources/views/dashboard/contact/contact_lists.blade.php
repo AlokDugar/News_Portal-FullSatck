@@ -97,11 +97,14 @@
 @endsection
 @push('scripts')
 <script>
+    const routeTemplate = @json(route('contact-lists.mark-seen', ['id' => '__ID__']));
+
     document.querySelectorAll('.view-message-btn').forEach(button => {
         button.addEventListener('click', function () {
             const contactId = this.getAttribute('data-id');
+            const url = routeTemplate.replace('__ID__', contactId);
 
-            fetch(`/contact-lists/${contactId}/mark-seen`, {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -118,6 +121,5 @@
         });
     });
 </script>
-
 @endpush
 
