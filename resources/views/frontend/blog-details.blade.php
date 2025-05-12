@@ -8,7 +8,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="post-format-inner-banner" style="background-image: {{ $article->image_path ? "url('" . asset('storage/' . $article->image_path) . "')" : 'linear-gradient(180deg, rgba(44, 44, 44, 0) 0%, #2C2C2C 100%)' }};">
+    <section class="post-format-inner-banner" style="background-image: {{ $article->image_path ? "url('" . asset('storage/' . $article->image_path) . "')" : 'linear-gradient(180deg, rgba(44, 44, 44, 0) 0%, #363636 100%)' }};">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
